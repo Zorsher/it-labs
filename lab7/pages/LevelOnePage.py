@@ -17,16 +17,48 @@ class LevelOnePage(QtWidgets.QWidget):
 
 
         self.inputArea = QtWidgets.QLineEdit()
+        self.inputArea.returnPressed.connect(self.addWord)
 
         self.listWidget = QtWidgets.QListWidget()
-        self.listWidget.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
-        self.listWidget.addItems(["a", "b", "c"])
+        self.listWidget.itemSelectionChanged.connect(self.itemSelected)
 
-        self.listWidget.itemClicked.connect(self.itemClicked)
+        self.groupCountLabel = QtWidgets.QLabel("Группы с чётным количеством символов")
+        self.groupLabel = QtWidgets.QLabel()
 
+        self.groupCountLabel.hide()
+        self.groupLabel.hide()
 
         self.centralLayout.addWidget(self.pageName, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.centralLayout.addWidget(self.taskLabel)
+        self.centralLayout.addWidget(self.inputArea)
         self.centralLayout.addWidget(self.listWidget)
+        self.centralLayout.addWidget(self.groupCountLabel)
+        self.centralLayout.addWidget(self.groupLabel)
         
-    def itemClicked(self, item: QtWidgets.QListWidgetItem):
+    def addWord(self):
+        sentence = self.inputArea.text()
+
+        if sentence == "" or sentence.count(" ") == len(sentence) or len(sentence) > (sentence.count("0") + sentence.count("1") + sentence.count(" ")):
+            return
+
+        self.inputArea.clear()
+        self.listWidget.addItem(sentence)
+
+    def itemSelected(self):
+        sentence = self.listWidget.selectedItems()[0].text().split(" ")
+        sortedItem = []
+
+        for word in sentence:
+            if len(word) % 2 == 0:
+                sortedItem.append(word)
+
+        if len(sortedItem) == 0:
+            self.groupCountLabel.hide()
+            self.groupLabel.hide()
+            return
         
+        self.groupCountLabel.show()
+        self.groupLabel.show()
+
+        self.groupLabel.setText(" ".join(sortedItem))
+
