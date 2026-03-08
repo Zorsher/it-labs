@@ -3,16 +3,19 @@ from widgets import TaskBlock, ImageWidget
 import random
 
 class LevelTwoPage(QtWidgets.QWidget):
+    """Страница второго задания"""  
     def __init__(self, parent = ...):
         super().__init__(parent)
         font = QtGui.QFont("Arial")
         font.setBold(True)
         font.setPixelSize(18)
 
+        # основной макет
         self.centralLayout = QtWidgets.QVBoxLayout(self)
         self.pageName = QtWidgets.QLabel("Уровень 2")
         self.pageName.setFont(font)
 
+        # задание
         self.taskLabel = QtWidgets.QLabel("Дан двумерный массив размерности 10х10. Заполнить его случайными числами на отрезке [-25,25]. Определить номера строк массива, суммы элементов которых меньше суммы элементов, стоящих на главной диагонали. Вывести исходный массив и полученный результат на печать.")
         self.taskLabel.setWordWrap(True)
 
@@ -67,6 +70,7 @@ class LevelTwoPage(QtWidgets.QWidget):
 
         self.createMatrix(10, 10)
 
+    # функция для создания матрицы
     def createMatrix(self, k, m):
         for row in range(0, k):
             for column in range(0, m):
@@ -77,6 +81,7 @@ class LevelTwoPage(QtWidgets.QWidget):
             label.setWordWrap(True)
             self.resultLayout.addWidget(label)
 
+    # функция для очистки матрицы
     def clearMatrix(self, k, m):
         for row in range(0, k):
             for column in range(0, m):
@@ -84,12 +89,14 @@ class LevelTwoPage(QtWidgets.QWidget):
 
         for i in range(0, 10):
             self.resultLayout.itemAt(i).widget().setText("")
-
+    
+    # функция для перегенерации матрицы
     def regenerateMatrix(self):
         self.clearMatrix(10, 10)
         self.generateMatrix(10, 10)
         self.changeresultLayout(10, 10)
 
+    # функция для генерации матрицы
     def generateMatrix(self, k, m):
         self.diagonalSum = 0
         for row in range(0, k):
@@ -101,7 +108,7 @@ class LevelTwoPage(QtWidgets.QWidget):
 
                 self.leftMatrix.itemAtPosition(row, column).widget().setText(f"{value}")
 
-
+    # функция для определения результата
     def changeresultLayout(self, k, m):
         s = 0
 

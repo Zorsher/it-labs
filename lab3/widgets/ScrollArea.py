@@ -5,6 +5,7 @@ from typing import Union
 
 
 class ScrollArea(QScrollArea):
+    """Область прокрутки"""
     def __init__(self, hideScrollBar: bool = False, layoutType: Union[QVBoxLayout, QHBoxLayout] = QVBoxLayout, isInverted = False, ignore_scroll_down = False):
         super().__init__()
         self.ignore_scroll_down = ignore_scroll_down

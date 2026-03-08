@@ -1,6 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 
 class ImageWidget(QtWidgets.QWidget):
+    """Виджет для отображения изображения"""
     def __init__(self, path):
         super().__init__()
         self.setFixedHeight(400)

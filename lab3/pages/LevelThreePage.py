@@ -3,6 +3,7 @@ from widgets import TaskBlock
 import math
 
 class LevelThreePage(QtWidgets.QWidget):
+    """Страница третьего задания"""
     def __init__(self, parent = ...):
         super().__init__(parent)
         font = QtGui.QFont("Arial")
@@ -20,10 +21,12 @@ class LevelThreePage(QtWidgets.QWidget):
             [self.findAngle]
         )
 
+        # добавляем элементы на страницу
         self.centralLayout.addWidget(self.pageName, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         self.centralLayout.addLayout(self.taskBlock)
         self.centralLayout.addStretch()
 
+    # функция для нахождения угла между прямыми
     def findAngle(self, a1, b1, c1, a2, b2, c2):
         scalar = a1 * a2 + b1 * b2
 

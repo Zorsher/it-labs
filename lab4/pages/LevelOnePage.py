@@ -3,16 +3,19 @@ from widgets import TaskBlock, ImageWidget
 import math
 
 class LevelOnePage(QtWidgets.QWidget):
+    """Страница первого задания"""
     def __init__(self, parent = ...):
         super().__init__(parent)
         font = QtGui.QFont("Arial")
         font.setBold(True)
         font.setPixelSize(18)
 
+        # основной макет
         self.centralLayout = QtWidgets.QVBoxLayout(self)
         self.pageName = QtWidgets.QLabel("Уровень 1")
         self.pageName.setFont(font)
 
+        # макет для формул
         self.funcsLayout = QtWidgets.QHBoxLayout()
         self.funcsLayout.addStretch()
 
@@ -22,6 +25,7 @@ class LevelOnePage(QtWidgets.QWidget):
 
         self.funcsLayout.addStretch()
 
+        # блок задания
         self.taskBlock = TaskBlock(
             "Нахождение значения функции по её аналитической формуле и как сумму с использованием оператора for. |x| <= pi/2",
             ["x"],
@@ -29,17 +33,20 @@ class LevelOnePage(QtWidgets.QWidget):
             [self.valueOneChanged, self.valueTwoChanged]
         )
 
+        # добавляем элементы на страницу
         self.centralLayout.addWidget(self.pageName, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         self.centralLayout.addLayout(self.funcsLayout)
         self.centralLayout.addLayout(self.taskBlock)
         self.centralLayout.addStretch()
 
+    # функция для нахождения значения функции по её аналитической формуле
     def valueOneChanged(self, x):
         if not abs(x) <= math.pi/2:
             return "x не находится в промежутке |x| <= pi/2"
         
         return (math.pi/4)*math.sin(x)
-        
+    
+    # функция для нахождения значения функции как сумму с использованием оператора for
     def valueTwoChanged(self, x):
         if not abs(x) <= math.pi/2:
             return "x не находится в промежутке |x| <= pi/2"

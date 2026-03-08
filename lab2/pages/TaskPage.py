@@ -4,6 +4,7 @@ from widgets.ScrollArea import ScrollArea
 import math
 
 class ParameterLayout(QtWidgets.QHBoxLayout):
+    """Параметр для задачи. Состоит из названия параметра и поля для ввода его значения"""
     textChanged = QtCore.Signal(str, str)
     def __init__(self, param):
         super().__init__()
@@ -21,6 +22,7 @@ class ParameterLayout(QtWidgets.QHBoxLayout):
         self.textChanged.emit(self.paramInput.toPlainText(), self.param)
 
 class TaskBlock(QtWidgets.QVBoxLayout):
+    """Блок с задачей. Состоит из множества параметров задач"""
     def __init__(self, taskText: str, params: list[str], toFoundList: list[str], funcs: list):
         super().__init__()
         self.funcs = funcs
@@ -43,6 +45,7 @@ class TaskBlock(QtWidgets.QVBoxLayout):
         for _ in range(0, len(funcs)):
             self.addWidget(QtWidgets.QLabel(""), alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
 
+    # Функция вызываемая при изменении параметра
     def paramChanged(self, value, param):
         try:
             self.paramsDict[param] = float(value)
@@ -65,6 +68,7 @@ class TaskBlock(QtWidgets.QVBoxLayout):
             answerLabel.setText(f"{self.toFoundList[index]} = {result}")
 
 class TaskPage(ScrollArea):
+    """Страница с задачами"""
     def __init__(self, parent = ...):
         super().__init__(layoutType=QtWidgets.QVBoxLayout, ignore_scroll_down=True)
         font = QtGui.QFont("Arial")
@@ -117,6 +121,7 @@ class TaskPage(ScrollArea):
             [lambda d, h: math.ceil(((math.pi * d * h) + ((math.pi * d**2)/4))/236)]
         )
 
+        # Добавление задач на страницу
         self.addWidget(self.firstTask)
         self.addWidget(self.secondTask)
         self.addWidget(self.thirdTask)

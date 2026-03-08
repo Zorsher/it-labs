@@ -18,6 +18,7 @@ class ParameterLayout(QtWidgets.QHBoxLayout):
         self.textChanged.emit(self.paramInput.toPlainText(), self.param)
 
 class TaskBlock(QtWidgets.QVBoxLayout):
+    """Блок с задачей. Состоит из множества параметров задач"""
     def __init__(self, taskText: str, params: list[str], toFoundList: list[str], funcs: list):
         super().__init__()
         self.funcs = funcs
@@ -40,6 +41,7 @@ class TaskBlock(QtWidgets.QVBoxLayout):
         for _ in range(0, len(funcs)):
             self.addWidget(QtWidgets.QLabel(""), alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
 
+    # Функция вызываемая при изменении параметра
     def paramChanged(self, value, param):
         try:
             self.paramsDict[param] = float(value)

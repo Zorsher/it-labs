@@ -2,16 +2,19 @@ from PySide6 import QtWidgets, QtGui, QtCore
 import random
 
 class LevelOnePage(QtWidgets.QWidget):
+    """Страница первого задания"""
     def __init__(self, parent = ...):
         super().__init__(parent)
         self.font_ = QtGui.QFont("Arial")
         self.font_.setBold(True)
         self.font_.setPixelSize(18)
 
+        # основной макет
         self.centralLayout = QtWidgets.QVBoxLayout(self)
         self.pageName = QtWidgets.QLabel("Уровень 1")
         self.pageName.setFont(self.font_)
 
+        # блок задания
         self.taskLabel = QtWidgets.QLabel("Дан одномерный массив размерности 20. Заполнить его случайными числами на отрезке [-25,25]. Вычислить  сумму всех ненулевых элементов с нечетными индексами. Вывести на печать исходный массив и полученные результаты.")
         self.taskLabel.setWordWrap(True)
 
@@ -46,10 +49,12 @@ class LevelOnePage(QtWidgets.QWidget):
 
         self.createArray()
 
+    # функция для создания массива
     def createArray(self, len = 20):
         for i in range(0, len):
             self.array.addWidget(QtWidgets.QLabel(""))
 
+    # функция для генерации массива
     def generateArray(self):
         s = 0
 

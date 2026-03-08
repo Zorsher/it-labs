@@ -3,16 +3,19 @@ from widgets import TaskBlock, ScrollArea
 import math
 
 class LevelThreePage(QtWidgets.QWidget):
+    """Страница третьего задания"""
     def __init__(self, parent = ...):
         super().__init__(parent)
         font = QtGui.QFont("Arial")
         font.setBold(True)
         font.setPixelSize(18)
 
+        # основной макет
         self.centralLayout = QtWidgets.QVBoxLayout(self)
         self.pageName = QtWidgets.QLabel("Уровень 3")
         self.pageName.setFont(font)
 
+        # блок задания
         self.taskBlock = TaskBlock(
             "Вычислить количество значений функции y=x², пренадлежащих заданнному интервалу (y0, y1)",
             ["y0", "y1", "step"],
@@ -20,6 +23,7 @@ class LevelThreePage(QtWidgets.QWidget):
             [self.findX]
         )
 
+        # макет для отображения значений функции
         self.valuesBoxLayout = QtWidgets.QHBoxLayout()
 
         # Левый лэйаут
@@ -62,6 +66,7 @@ class LevelThreePage(QtWidgets.QWidget):
         self.centralLayout.addLayout(self.valuesBoxLayout)
         # self.centralLayout.addStretch()
 
+    # функция для вычисления x при помощи цикла while и repeat
     def findX(self, y0, y1, step):
         if y0 < 0 or y1 < 0 or step <= 0:
             return None

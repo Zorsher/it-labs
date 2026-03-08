@@ -14,7 +14,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setStyleSheet(loadStyle())
     app.setWindowIcon(QtGui.QIcon("logo.png"))
-    app.setApplicationName("Лаб. 1. Вариант 4. Вишняков П.С.")
+    app.setApplicationName("Лаб. 1. Вариант 4. Вишняков П.С. ИВТ-11")
 
     # создание основного окна
     mainWindow = MainWindow()

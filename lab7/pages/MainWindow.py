@@ -3,19 +3,27 @@ from pages.HelloPage import HelloPage
 from pages.LevelOnePage import LevelOnePage
 
 class MainWindow(QtWidgets.QWidget):
+    """
+    Основное окно приложения
+    """
     def __init__(self):
         super().__init__()
         self.setFixedSize(800, 600)
+        # основной макет
         self.centralLayout = QtWidgets.QVBoxLayout(self)
 
         self.stackedLayout = QtWidgets.QStackedLayout()
 
+        # приветственное окно
         self.helloPage = HelloPage(self)
+
+        # окно с заданием
         self.levelOnePage = LevelOnePage(self)
 
         self.stackedLayout.addWidget(self.helloPage)
         self.stackedLayout.addWidget(self.levelOnePage)
 
+        # кнопки для навигации
         self.buttonsLayout = QtWidgets.QHBoxLayout()
 
         self.previousButton = QtWidgets.QPushButton("Назад")
@@ -35,6 +43,7 @@ class MainWindow(QtWidgets.QWidget):
         
         self.stackedLayout.currentChanged.connect(self.pageChanged)
 
+    # метод для отображения/скрытия кнопок в зависимости от текущей страницы
     def pageChanged(self):
         if self.stackedLayout.currentIndex() - 1 == 0:
             self.previousButton.hide()
@@ -46,6 +55,7 @@ class MainWindow(QtWidgets.QWidget):
         else:
             self.nextButton.show()
 
+    # методы для переключения страниц
     def nextPage(self):
         self.stackedLayout.setCurrentIndex(self.stackedLayout.currentIndex() + 1)
 
